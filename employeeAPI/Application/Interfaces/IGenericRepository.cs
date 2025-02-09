@@ -12,6 +12,6 @@ namespace EmployeeAPI.Infrastructure.Repositories
         Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
         Task AddAsync(T entity);
         Task UpdateAsync(T entity);
-        Task DeleteAsync(Guid id);
+        Task DeleteAsync(T entity);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using employeeAPI.Application.Interfaces;
 using employeeAPI.Application.Services;
 using employeeAPI.Infrastructure;
+using employeeAPI.Infrastructure.Services;
 using EmployeeAPI.Infrastructure.Repositories;
 
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,16 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
 
 // add  IEmployeeService و EmployeeService إلى DI Container
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+
+builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+
+builder.Services.AddScoped<IProjectService, ProjectService>();
+
+
+// خدمات أخرى
+builder.Services.AddScoped<IEmployeeProjectService, EmployeeProjectService>();
+
+
 
 var app = builder.Build();
 

@@ -78,7 +78,7 @@ namespace employeeAPI.Application.Services
             var employee = await _employeeRepository.GetByIdAsync(id);
             if (employee == null) return false;
 
-            await _employeeRepository.DeleteAsync(id);
+            await _employeeRepository.DeleteAsync(employee);
             return true;
         }
     }
