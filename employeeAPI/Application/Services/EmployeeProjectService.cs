@@ -24,7 +24,7 @@ namespace employeeAPI.Infrastructure.Services
             _projectRepository = projectRepository;
         }
 
-        // تعيين موظف لمشاريع متعددة
+        //    assign employee to many projects
         public async Task<bool> AssignEmployeeToProjectsAsync(Guid employeeId, List<Guid> projectIds)
         {
             var employee = await _employeeRepository.GetByIdAsync(employeeId);
@@ -49,7 +49,7 @@ namespace employeeAPI.Infrastructure.Services
             return true;
         }
 
-        // إزالة موظف من مشروع
+        // delete employee from specific project
         public async Task<bool> RemoveEmployeeFromProjectAsync(Guid employeeId, Guid projectId)
         {
             var employeeProject = await _employeeProjectRepository.GetAllAsync();

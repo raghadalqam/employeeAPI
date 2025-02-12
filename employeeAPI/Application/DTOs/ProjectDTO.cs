@@ -1,11 +1,10 @@
-﻿using System;
-
-namespace employeeAPI.Application.DTOs
+﻿namespace employeeAPI.Application.DTOs
 {
-    public record ProjectDTO
+    public class ProjectDTO
     {
-        public Guid Id { get; init; }
-        public string Name { get; init; }
-        public string Description { get; init; }
+        public Guid Id { get; set; }
+        public string Title { get; set; }
+
+
     }
 }

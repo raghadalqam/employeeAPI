@@ -1,5 +1,5 @@
-﻿using employeeAPI.Application.DTOs;
-using employeeAPI.Domain;
+﻿using employeeAPI.Application.DTOs; // لنقل البيانات بين الطبقات 
+using employeeAPI.Domain; // to access the entites in domain 
 
 namespace employeeAPI.Application.Interfaces
 {

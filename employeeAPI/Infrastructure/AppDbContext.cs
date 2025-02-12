@@ -17,18 +17,24 @@ namespace employeeAPI.Infrastructure
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<EmployeeProject>()
-                .HasKey(ep => new { ep.EmployeeId, ep.ProjectId });
+          
 
+            // Many-to-Many between Employee and Project  by using join table EmployeeProject
+            modelBuilder.Entity<EmployeeProject>()
+                .HasKey(ep => new { ep.EmployeeId, ep.ProjectId }); //   foregin key for  EmployeeId , ProjectId
+
+            //  relationship  Employee and  EmployeeProject
             modelBuilder.Entity<EmployeeProject>()
                 .HasOne(ep => ep.Employee)
-                .WithMany(e => e.EmployeeProjects)
+                .WithMany(e => e.EmployeeProjects) // we should add  ICollection<EmployeeProject> in  Employee
                 .HasForeignKey(ep => ep.EmployeeId);
 
+            //  relationship  Project and EmployeeProject
             modelBuilder.Entity<EmployeeProject>()
                 .HasOne(ep => ep.Project)
-                .WithMany(p => p.EmployeeProjects)
+                .WithMany(p => p.EmployeeProjects) //  we should add  ICollection<EmployeeProject> in Project
                 .HasForeignKey(ep => ep.ProjectId);
         }
+    
     }
 }

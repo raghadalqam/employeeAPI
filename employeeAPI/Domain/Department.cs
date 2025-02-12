@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using employeeAPI.Domain;
+using System.ComponentModel.DataAnnotations;
 
-namespace employeeAPI.Domain
+public class Department
 {
-    public class Department
-    {
-        public Guid Id { get; set; } = Guid.NewGuid();
-        public string Name { get; set; } = string.Empty;
-        public ICollection<Employee> Employees { get; set; } = new List<Employee>();
-    }
+    [Key]
+    public Guid Id { get; set; } = Guid.NewGuid(); 
+    [Required]
+    public string Name { get; set; }
+
+    // relationship 
+    public ICollection<Employee> Employees { get; set; } = new List<Employee>();
 }

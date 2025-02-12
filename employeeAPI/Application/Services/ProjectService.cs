@@ -7,28 +7,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace employeeAPI.Infrastructure.Services
+namespace employeeAPI.Application.Services
 {
     public class ProjectService : IProjectService
     {
         private readonly IGenericRepository<Project> _projectRepository;
 
+        // Constructor
         public ProjectService(IGenericRepository<Project> projectRepository)
         {
             _projectRepository = projectRepository;
         }
 
+        // Get all projects
         public async Task<IEnumerable<ProjectDTO>> GetAllProjectsAsync()
         {
             var projects = await _projectRepository.GetAllAsync();
+
+            //check empty fields
             return projects.Select(p => new ProjectDTO
             {
                 Id = p.Id,
-                Name = p.Name,
-                Description = p.Description
-            }).ToList();
+                Title = p.Title ?? "Default Title" //use defulte value if is it empty
         }
 
+        // Get a project by its ID
         public async Task<ProjectDTO> GetProjectByIdAsync(Guid id)
         {
             var project = await _projectRepository.GetByIdAsync(id);
@@ -37,41 +40,45 @@ namespace employeeAPI.Infrastructure.Services
             return new ProjectDTO
             {
                 Id = project.Id,
-                Name = project.Name,
-                Description = project.Description
+                Title = project.Title
             };
         }
 
+        // Create a new project
         public async Task<ProjectDTO> CreateProjectAsync(ProjectDTO projectDto)
         {
             var project = new Project
             {
-                Id = Guid.NewGuid(),
-                Name = projectDto.Name,
-                Description = projectDto.Description
+                Id = Guid.NewGuid(), 
+                Title = projectDto.Title
             };
 
             await _projectRepository.AddAsync(project);
-            return projectDto with { Id = project.Id };
+
+            return new ProjectDTO
+            {
+                Id = project.Id,
+                Title = project.Title
+            };
         }
 
+        // Update an existing project
         public async Task<ProjectDTO> UpdateProjectAsync(Guid id, ProjectDTO projectDto)
         {
             var project = await _projectRepository.GetByIdAsync(id);
             if (project == null) return null;
 
-            project.Name = projectDto.Name;
-            project.Description = projectDto.Description;
-            await _projectRepository.UpdateAsync(project);
+            project.Title = projectDto.Title;
 
+            await _projectRepository.UpdateAsync(project);
             return new ProjectDTO
             {
                 Id = project.Id,
-                Name = project.Name,
-                Description = project.Description
+                Title = project.Title
             };
         }
 
+        // Delete a project
         public async Task<bool> DeleteProjectAsync(Guid id)
         {
             var project = await _projectRepository.GetByIdAsync(id);

@@ -17,7 +17,7 @@ namespace employeeAPI.Infrastructure.Services
         {
             _departmentRepository = departmentRepository;
         }
-
+        //get all department
         public async Task<IEnumerable<DepartmentDTO>> GetAllDepartmentsAsync()
         {
             var departments = await _departmentRepository.GetAllAsync();
@@ -27,7 +27,7 @@ namespace employeeAPI.Infrastructure.Services
                 Name = d.Name
             }).ToList();
         }
-
+        //get department by id 
         public async Task<DepartmentDTO> GetDepartmentByIdAsync(Guid id)
         {
             var department = await _departmentRepository.GetByIdAsync(id);
@@ -39,7 +39,7 @@ namespace employeeAPI.Infrastructure.Services
                 Name = department.Name
             };
         }
-
+        //add new department 
         public async Task<DepartmentDTO> CreateDepartmentAsync(DepartmentDTO departmentDto)
         {
             var department = new Department
@@ -51,7 +51,7 @@ namespace employeeAPI.Infrastructure.Services
             await _departmentRepository.AddAsync(department);
             return departmentDto with { Id = department.Id }; // تحديث `Id` بعد الإضافة
         }
-
+        //update  department
         public async Task<DepartmentDTO> UpdateDepartmentAsync(Guid id, DepartmentDTO departmentDto)
         {
             var department = await _departmentRepository.GetByIdAsync(id);
@@ -66,7 +66,7 @@ namespace employeeAPI.Infrastructure.Services
                 Name = department.Name
             };
         }
-
+        //delete department
         public async Task<bool> DeleteDepartmentAsync(Guid id)
         {
             var department = await _departmentRepository.GetByIdAsync(id);

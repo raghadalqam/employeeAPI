@@ -31,11 +31,17 @@ namespace employeeAPI.Presentation.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateEmployee(EmployeeDTO employeeDto)
+        public async Task<IActionResult> CreateEmployee( EmployeeDTO employeeDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var createdEmployee = await _employeeService.CreateEmployeeAsync(employeeDto);
             return CreatedAtAction(nameof(GetEmployeeById), new { id = createdEmployee.Id }, createdEmployee);
         }
+
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateEmployee(Guid id, EmployeeDTO employeeDto)

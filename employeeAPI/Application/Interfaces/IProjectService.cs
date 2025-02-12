@@ -12,5 +12,7 @@ namespace employeeAPI.Application.Interfaces
         Task<ProjectDTO> CreateProjectAsync(ProjectDTO projectDto);
         Task<ProjectDTO> UpdateProjectAsync(Guid id, ProjectDTO projectDto);
         Task<bool> DeleteProjectAsync(Guid id);
+
+       
     }
 }
