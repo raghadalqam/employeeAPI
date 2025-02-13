@@ -28,8 +28,10 @@ namespace employeeAPI.Application.Services
             return projects.Select(p => new ProjectDTO
             {
                 Id = p.Id,
-                Title = p.Title ?? "Default Title" //use defulte value if is it empty
+                Title = p.Title ?? "Default Title"
+            });                                         //use defulte value if is it empty
         }
+        
 
         // Get a project by its ID
         public async Task<ProjectDTO> GetProjectByIdAsync(Guid id)

@@ -26,13 +26,13 @@ namespace employeeAPI.Infrastructure
             //  relationship  Employee and  EmployeeProject
             modelBuilder.Entity<EmployeeProject>()
                 .HasOne(ep => ep.Employee)
-                .WithMany(e => e.EmployeeProjects) // we should add  ICollection<EmployeeProject> in  Employee
+                .WithMany(e => e.EmployeeProjects) 
                 .HasForeignKey(ep => ep.EmployeeId);
 
             //  relationship  Project and EmployeeProject
             modelBuilder.Entity<EmployeeProject>()
                 .HasOne(ep => ep.Project)
-                .WithMany(p => p.EmployeeProjects) //  we should add  ICollection<EmployeeProject> in Project
+                .WithMany(p => p.EmployeeProjects) 
                 .HasForeignKey(ep => ep.ProjectId);
         }
     
